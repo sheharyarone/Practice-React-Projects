@@ -1,8 +1,8 @@
 **Step 1: Component Structure**
 *Make two components:*
 
-RollDice - a parent component (rendered by App) that renders the dice and a button to roll.
-Die - an individual die that takes props and displays the correct face of the die based on props.
+<sub>RollDice - a parent component (rendered by App) that renders the dice and a button to roll.
+Die - an individual die that takes props and displays the correct face of the die based on props.</sub>
 **Step 2: Making Dice**
 How are we going to render dice?
 
