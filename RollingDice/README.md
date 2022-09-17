@@ -12,14 +12,6 @@ Make two components:
 - ***Die*** - an individual die that takes props and displays the correct face of the die based on props.
 
 **Step 2: Making Dice**
-
-=======
-**Step 1: Component Structure**
-*Make two components:*
-
-<sub>RollDice - a parent component (rendered by App) that renders the dice and a button to roll.
-Die - an individual die that takes props and displays the correct face of the die based on props.</sub>
-**Step 2: Making Dice**
 >>>>>>> a61d10d7aaac1b8871b1599a10132605d1152d74
 How are we going to render dice?
 
@@ -55,12 +47,6 @@ Remember that these values will have to be translated into fas fa-dice-one th
 Do you have to store each class name in the array or can you programmatically decide which one the ***Die*** components should have?
 
 **Further Study**
-
-**Animation**
-
-<<<<<<< HEAD
-=======
-**Further Study**
 *Animation*
 >>>>>>> a61d10d7aaac1b8871b1599a10132605d1152d74
 The solution displays an animation every time the dice are rolled.
@@ -71,14 +57,11 @@ This is done by appending a class containing a CSS animation, and then removing 
 
 **Changing Button Text**
 
-<<<<<<< HEAD
 The button can also dynamically change its text and become disabled (un-clickable) until the animation has completed.
 
 It relies on the additional piece of state that says whether the dice are currently rolling or not.
 
-=======
 **Changing Button Text**
 The button can also dynamically change its text and become disabled (un-clickable) until the animation has completed.
 
 It relies on the additional piece of state that says whether the dice are currently rolling or not.
->>>>>>> a61d10d7aaac1b8871b1599a10132605d1152d74
