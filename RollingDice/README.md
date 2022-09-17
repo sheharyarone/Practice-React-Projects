@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ﻿**Roll Dice**
 
 Let’s build an app that lets us roll a pair of dice. Here’s a gif for some inspiration (this is the solution code running):
