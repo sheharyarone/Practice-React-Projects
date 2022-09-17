@@ -1,4 +1,4 @@
-####Step 1: Component Structure
+####Step 1: Component Structure####
 Make two components:
 
 RollDice - a parent component (rendered by App) that renders the dice and a button to roll.
