@@ -39,10 +39,8 @@ This gives you access to any FA classes in the JSX.
 Your ***Die.js*** component would just be an icon that dynamically changes its class to the proper die face based on props from the parent component’s state.
 
 **Step 3: Rolling Dice**
-<<<<<<< HEAD
+ HEAD
 =======
-The RollDice component should have:
->>>>>>> a61d10d7aaac1b8871b1599a10132605d1152d74
 
 The ***RollDice*** component should have:
 
