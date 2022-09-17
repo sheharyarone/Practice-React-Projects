@@ -12,7 +12,6 @@ Make two components:
 - ***Die*** - an individual die that takes props and displays the correct face of the die based on props.
 
 **Step 2: Making Dice**
->>>>>>> a61d10d7aaac1b8871b1599a10132605d1152d74
 How are we going to render dice?
 
 We could get six different image files, but there is a better way!
@@ -30,8 +29,6 @@ This gives you access to any FA classes in the JSX.
 Your ***Die.js*** component would just be an icon that dynamically changes its class to the proper die face based on props from the parent component’s state.
 
 **Step 3: Rolling Dice**
- HEAD
-=======
 
 The ***RollDice*** component should have:
 
@@ -48,7 +45,6 @@ Do you have to store each class name in the array or can you programmatically de
 
 **Further Study**
 *Animation*
->>>>>>> a61d10d7aaac1b8871b1599a10132605d1152d74
 The solution displays an animation every time the dice are rolled.
 
 A new piece of state is necessary to say whether the dice are currently rolling or not.
