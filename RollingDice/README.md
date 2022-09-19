@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ﻿**Roll Dice**
 
 Let’s build an app that lets us roll a pair of dice. Here’s a gif for some inspiration (this is the solution code running):
@@ -13,15 +12,6 @@ Make two components:
 - ***Die*** - an individual die that takes props and displays the correct face of the die based on props.
 
 **Step 2: Making Dice**
-
-=======
-**Step 1: Component Structure**
-*Make two components:*
-
-<sub>RollDice - a parent component (rendered by App) that renders the dice and a button to roll.
-Die - an individual die that takes props and displays the correct face of the die based on props.</sub>
-**Step 2: Making Dice**
->>>>>>> a61d10d7aaac1b8871b1599a10132605d1152d74
 How are we going to render dice?
 
 We could get six different image files, but there is a better way!
@@ -39,10 +29,6 @@ This gives you access to any FA classes in the JSX.
 Your ***Die.js*** component would just be an icon that dynamically changes its class to the proper die face based on props from the parent component’s state.
 
 **Step 3: Rolling Dice**
-<<<<<<< HEAD
-=======
-The RollDice component should have:
->>>>>>> a61d10d7aaac1b8871b1599a10132605d1152d74
 
 The ***RollDice*** component should have:
 
@@ -58,14 +44,7 @@ Remember that these values will have to be translated into fas fa-dice-one th
 Do you have to store each class name in the array or can you programmatically decide which one the ***Die*** components should have?
 
 **Further Study**
-
-**Animation**
-
-<<<<<<< HEAD
-=======
-**Further Study**
 *Animation*
->>>>>>> a61d10d7aaac1b8871b1599a10132605d1152d74
 The solution displays an animation every time the dice are rolled.
 
 A new piece of state is necessary to say whether the dice are currently rolling or not.
@@ -74,14 +53,11 @@ This is done by appending a class containing a CSS animation, and then removing 
 
 **Changing Button Text**
 
-<<<<<<< HEAD
 The button can also dynamically change its text and become disabled (un-clickable) until the animation has completed.
 
 It relies on the additional piece of state that says whether the dice are currently rolling or not.
 
-=======
 **Changing Button Text**
 The button can also dynamically change its text and become disabled (un-clickable) until the animation has completed.
 
 It relies on the additional piece of state that says whether the dice are currently rolling or not.
->>>>>>> a61d10d7aaac1b8871b1599a10132605d1152d74
