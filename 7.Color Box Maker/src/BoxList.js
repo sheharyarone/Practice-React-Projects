@@ -1,13 +1,40 @@
 import React, { Component } from 'react';
+import Box from './Box';
 import NewBoxForm from './NewBoxForm';
 
 class BoxList extends Component {
-    render(){
-        
-    
-        return(
+    constructor(props) {
+        super(props);
+        this.state = {
+            boxes: []
+        }
+        this.createBox = this.createBox.bind(this);
+    }
+    createBox(newBox) {
+        this.setState({
+            boxes: [...this.state.boxes, newBox]
+        });
+    }
+    remove(id){
+        console.log('clicked');
+        this.state.boxes.filter((box)=> box.id!=id);
+    }
+    render() {
+        let renderBox = this.state.boxes.map(box =>
+            <Box
+                key={box.id}
+                id={box.id}
+                width={box.width}
+                height={box.width}
+                color={box.color}
+                removeBox={()=>this.remove(box.id)}
+            />
+
+        );
+        return (
             <div>
-            {this.props.data}
+                <NewBoxForm create={this.createBox} />
+                {renderBox}
             </div>
         )
     }
