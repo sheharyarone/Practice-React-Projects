@@ -2,14 +2,7 @@
 
 React Forms Exercises
 
-- [React Forms Exercises]() 
-  - [Part 1 - Color Box Maker](#part-1-color-box-maker)
-  - [Part 2 - Todo App - List, Add, Remove Todos](#part-2-todo-app-list-add-remove-todos)
-  - [Part 3 - Todo App - Editing](#part-3-todo-app-editing)
-  - [Further Study](#further-study)
-# **React Forms Exercises**
-These exercises will give you more practice working with React forms. 
-## **Part 1 - Color Box Maker**
+## **Color Box Maker**
 Create a new React application, which contains the following components: 
 
 - *App* - this component should render the *BoxList* component. 
