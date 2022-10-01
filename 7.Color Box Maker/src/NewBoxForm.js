@@ -7,20 +7,14 @@ class NewBoxForm extends Component {
 constructor(props) {
     super(props);
     this.state = {
-        boxList: [
-            <Box color={'green'} width={20} height={30}/>,
-            <Box color={'blue'} width={30} height={30}/>
-
-
-        ],
-
+        boxList: [],
         color: '',
         height: '',
         width: ''
-
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSumbit = this.handleSumbit.bind(this);
+    this.handleRender=this.handleRender.bind(this);
 }
 handleChange(evt) {
     this.setState({
@@ -28,16 +22,25 @@ handleChange(evt) {
     })
 }
 handleSumbit(evt) {
-
+    evt.preventDefault();
+    <Box key={uuid()} color={this.state.color} width={this.state.width} height={this.state.height}/>
     this.setState({
-        boxList:[...this.state.boxList,<Box key={uuid()} color={this.state.color} width={this.state.width} height={this.state.height}/>]
-        // color: '',
-        // width: '',
-        // color: ''
+        boxList:[...this.state.boxList,<Box key={uuid()} color={this.state.color} width={this.state.width} height={this.state.height}/>],
+        color: '',
+        width: '',
+        height: ''
     });
+    // <BoxList data={this.state.boxList}/>
 }
-
+handleRender(){
+    for(let i=0;i<this.state.boxList.length;i++){
+        <div>
+            {this.state.boxList[i]}
+        </div>
+    }
+}
 render() {
+    
 return (
     <div>
     <form onSubmit={this.handleSumbit}>
@@ -52,9 +55,7 @@ return (
 
         <button>SUMBIT</button>
     </form>
-    <div>
-        <BoxList boxList={this.state.boxList}/>
-    </div>
+    {this.handleRender}
     </div>
     )
 }
