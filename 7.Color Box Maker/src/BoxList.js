@@ -16,8 +16,9 @@ class BoxList extends Component {
         });
     }
     remove(id){
-        console.log('clicked');
-        this.state.boxes.filter((box)=> box.id!=id);
+        this.setState({
+            boxes: this.state.boxes.filter(box => box.id !== id)
+          });
     }
     render() {
         let renderBox = this.state.boxes.map(box =>
