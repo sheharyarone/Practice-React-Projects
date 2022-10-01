@@ -17,9 +17,9 @@ class NewTodoForm extends Component {
     handleSumbit(evt){
         evt.preventDefault();
         this.props.createTask(this.state.taskState);
-        // this.setState({
-        //     taskState : ''
-        // })
+        this.setState({
+            taskState : ''
+        })
     }
     
     render(){
