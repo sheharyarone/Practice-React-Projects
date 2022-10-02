@@ -20,6 +20,9 @@ class BoxList extends Component {
             boxes: this.state.boxes.filter(box => box.id !== id)
           });
     }
+    edit(id){
+         // FUCNTION TO WRITE
+    }
     render() {
         let renderBox = this.state.boxes.map(box =>
             <Box
