@@ -11,6 +11,7 @@ class TodoList extends Component {
         }
         this.create = this.create.bind(this);
         this.remove = this.remove.bind(this);
+        this.update=this.update.bind(this);
     }
     create(newTask) {
         const inputTask = { task: newTask, id: uuid() }
@@ -19,12 +20,23 @@ class TodoList extends Component {
         });
     }
     remove(id) {
-        console.log('CLicked');
         this.setState({
 
-            taskList: this.state.taskList.filter((eachTask) => eachTask.id != id)
+            taskList: this.state.taskList.filter((eachTask) => eachTask.id !== id)
         })
 
+    }
+    
+    update(id,updatedTask){
+        const updatedtaskList=this.state.taskList.map((task)=>{
+            if(id===task.id){
+                return {...task,task: updatedTask}
+            }
+            return task;
+    })
+    this.setState({
+        taskList : updatedtaskList
+    })
     }
     render() {
         let tasksRendering = this.state.taskList.map((eachTask) =>
@@ -33,6 +45,7 @@ class TodoList extends Component {
                 id={eachTask.id}
                 task={eachTask.task}
                 remove={() => this.remove(eachTask.id)}
+                updateTask={this.update}
             />);
         return (
             <div>
