@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import './NewTodoForm.css';
 class NewTodoForm extends Component {
     constructor(props){
         super(props);
@@ -24,8 +24,11 @@ class NewTodoForm extends Component {
     
     render(){
         return(
-            <div>
-                <form onSubmit={this.handleSumbit}>
+            <div >
+                <form 
+                onSubmit={this.handleSumbit}
+                className='NewTodoForm'
+                >
                 <label htmlFor="task">New Task</label>
                     <input  id='task' type="text" name='new Task' value={this.state.taskState} onChange={this.handleChange} />
                 <button >Sumbit</button>

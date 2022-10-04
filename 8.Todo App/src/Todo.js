@@ -1,62 +1,77 @@
 import React, { Component } from 'react';
 import './Todo.css'
 class Todo extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
-            task : this.props.task,
-            isEditing : false
+        this.state = {
+            task: this.props.task,
+            isEditing: false
         }
-        this.toggleEdit=this.toggleEdit.bind(this);
-        this.handleChange=this.handleChange.bind(this);
-        this.handleUpdate=this.handleUpdate.bind(this);
-        this.handleCompletion=this.handleCompletion.bind(this);
+        this.toggleEdit = this.toggleEdit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleUpdate = this.handleUpdate.bind(this);
+        this.handleCompletion = this.handleCompletion.bind(this);
     }
-    toggleEdit(){
-        this.setState({isEditing:  !this.state.isEditing} )
+    toggleEdit() {
+        this.setState({ isEditing: !this.state.isEditing })
     }
-    handleChange(evt){
+    handleChange(evt) {
         this.setState({
             task: evt.target.value
         })
     }
-    handleUpdate(evt){
+    handleUpdate(evt) {
         evt.preventDefault();
 
-        this.props.updateTask(this.props.id,this.state.task)
+        this.props.updateTask(this.props.id, this.state.task)
         this.toggleEdit();
     }
-    handleCompletion(){
+    handleCompletion() {
         this.props.complete(this.props.id);
     }
-    render(){
-        if (!this.state.isEditing){   //isEditing : FALSE
-        return(
-            <div>
-                <p 
-                onClick={this.handleCompletion}
-                className={this.props.isCompleted ? 'Completed' : ''}
-                >
-                    {this.props.task}
-                </p>
-                <button onClick={this.props.remove}>Delete</button>
-                <button onClick={this.toggleEdit}>Edit</button>
-            
-            </div>
-        )}
+    render() {
+        if (!this.state.isEditing) {   //isEditing : FALSE
+            return (
+                <div className='Todo'>
+                    <li
 
-        else{
-            return(
-            <div>
-                <form onSubmit={this.handleUpdate}>
-                    <input id='task' type='text' onChange={this.handleChange} value={this.state.task} />
-                    <button>Sumbit</button>
-                </form>
+                        onClick={this.handleCompletion}
+                        className={this.props.isCompleted ? 'Todo-task ompleted' : 'Todo-task'}
+                    >
+                        {this.props.task}
+                    </li>
+                    <div className='Todo-buttons'>
+                        <button onClick={this.props.remove}>
+                            <i class='fas fa-trash' />
+                        </button>
+                        <button onClick={this.toggleEdit}>
+                            <i class='fas fa-pen' />
+                        </button>
+                    </div>
+                </div>
+            )
+        }
 
-            </div>
+        else {
+            return (
+                <div className='Todo'>
+                    <form className='Todo-edit-form'
+                    onSubmit={this.handleUpdate}
+                    >
+                        <input name='task'
+                            type='text'
+                            onChange={this.handleChange}
+                            value={this.state.task}
 
-        )}
-}
+                        />
+                        <button>Save</button>
+                    </form>
+
+                </div>
+
+            )
+        }
+    }
 
 }
 export default Todo;
