@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import './Todo.css'
 class Todo extends Component {
     constructor(props){
         super(props);
@@ -10,6 +10,7 @@ class Todo extends Component {
         this.toggleEdit=this.toggleEdit.bind(this);
         this.handleChange=this.handleChange.bind(this);
         this.handleUpdate=this.handleUpdate.bind(this);
+        this.handleCompletion=this.handleCompletion.bind(this);
     }
     toggleEdit(){
         this.setState({isEditing:  !this.state.isEditing} )
@@ -25,11 +26,17 @@ class Todo extends Component {
         this.props.updateTask(this.props.id,this.state.task)
         this.toggleEdit();
     }
+    handleCompletion(){
+        this.props.complete(this.props.id);
+    }
     render(){
         if (!this.state.isEditing){   //isEditing : FALSE
         return(
             <div>
-                <p>
+                <p 
+                onClick={this.handleCompletion}
+                className={this.props.isCompleted ? 'Completed' : ''}
+                >
                     {this.props.task}
                 </p>
                 <button onClick={this.props.remove}>Delete</button>
