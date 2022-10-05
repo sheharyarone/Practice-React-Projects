@@ -20,10 +20,10 @@
   opacity: 0.5;
 }
 
-.Todo.completed .Todo-task {
-  /* opacity: 0.6; */
+.Todo-task.completed {
+  opacity: 0.6;
 }
-.Todo.completed .Todo-task:before {
+.Todo-task.completed:before {
   content: "";
   position: absolute;
   top: 50%;

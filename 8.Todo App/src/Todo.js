@@ -36,16 +36,16 @@ class Todo extends Component {
                     <li
 
                         onClick={this.handleCompletion}
-                        className={this.props.isCompleted ? 'Todo-task ompleted' : 'Todo-task'}
+                        className={this.props.isCompleted ? 'Todo-task completed' : 'Todo-task'}
                     >
                         {this.props.task}
                     </li>
                     <div className='Todo-buttons'>
                         <button onClick={this.props.remove}>
-                            <i class='fas fa-trash' />
+                            <i className='fas fa-trash' />
                         </button>
                         <button onClick={this.toggleEdit}>
-                            <i class='fas fa-pen' />
+                            <i className='fas fa-pen' />
                         </button>
                     </div>
                 </div>
