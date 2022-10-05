@@ -23,6 +23,8 @@ class Rule {
     // frequencies of dice values
     const freqs = new Map();
     for (let d of dice) freqs.set(d, (freqs.get(d) || 0) + 1);
+
+    // console.log(Array.from(freqs.values()));
     return Array.from(freqs.values());
   }
 
@@ -57,14 +59,24 @@ class SumDistro extends Rule {
 
 /** Check if full house (3-of-kind and 2-of-kind) */
 
-class FullHouse {
+class FullHouse extends Rule{
   // TODO
-}
 
+  evalRoll = (dice) => {
+    if (this.freq(dice).length === 2) {
+      if (this.freq(dice)[0] === 2 || this.freq(dice)[1] === 3) {
+        return this.score;
+      }
+    } else {
+      return 0;
+    }
+  };
+}
 /** Check for small straights. */
 
 class SmallStraight {
   // TODO
+
 }
 
 /** Check for large straights. */
@@ -100,7 +112,7 @@ const threeOfKind = new SumDistro({ count: 3 });
 const fourOfKind = new SumDistro({ count: 4 });
 
 // full house scores as flat 25
-const fullHouse = "TODO";
+const fullHouse = new FullHouse({ score: 25 });
 
 // small/large straights score as 30/40
 const smallStraight = "TODO";

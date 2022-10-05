@@ -13,6 +13,7 @@ class Game extends Component {
       dice: Array.from({ length: NUM_DICE }),
       locked: Array(NUM_DICE).fill(false),
       rollsLeft: NUM_ROLLS,
+
       scores: {
         ones: undefined,
         twos: undefined,
@@ -31,6 +32,7 @@ class Game extends Component {
     };
     this.roll = this.roll.bind(this);
     this.doScore = this.doScore.bind(this);
+    this.toggleLocked=this.toggleLocked.bind(this);
   }
 
   roll(evt) {
@@ -45,12 +47,14 @@ class Game extends Component {
   }
 
   toggleLocked(idx) {
+    console.log(idx);
     // toggle whether idx is in locked or not
     this.setState(st => ({
       locked: [
         ...st.locked.slice(0, idx),
         !st.locked[idx],
         ...st.locked.slice(idx + 1)
+        // !st.locked[idx]
       ]
     }));
   }
