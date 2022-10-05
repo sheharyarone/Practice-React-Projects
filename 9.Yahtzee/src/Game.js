@@ -37,7 +37,7 @@ class Game extends Component {
 
   roll(evt) {
     // roll dice whose indexes are in reroll
-    if(this.state.rollsLeft!==0)
+    if(this.state.rollsLeft>-1)
     {this.setState(st => ({
       dice: st.dice.map((d, i) =>
         st.locked[i] ? d : Math.ceil(Math.random() * 6)
