@@ -58,14 +58,13 @@ class Game extends Component {
   toggleLocked(idx) {
     
     // toggle whether idx is in locked or not
-    if(this.state.rollsLeft!==0)
+    if(this.state.rollsLeft!==0 && !this.state.rolling)
     {
     this.setState(st => ({
       locked: [
         ...st.locked.slice(0, idx),
         !st.locked[idx],
         ...st.locked.slice(idx + 1)
-        // !st.locked[idx]
       ]
     }));
   }
