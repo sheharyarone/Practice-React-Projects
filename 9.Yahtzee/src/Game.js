@@ -59,7 +59,7 @@ class Game extends Component {
   toggleLocked(idx) {
     
     // toggle whether idx is in locked or not
-    if(this.state.rollsLeft!==0 && !this.state.rolling)
+    if( !this.state.rolling)
     {
     this.setState(st => ({
       locked: [
@@ -108,7 +108,10 @@ class Game extends Component {
             <div className='Game-button-wrapper'>
               <button
                 className='Game-reroll'
-                disabled={this.state.locked.every(x => x)}
+                disabled={this.state.locked.every(x => x) ||
+                   this.state.rolling ||
+                   this.state.rollsLeft===0
+                  }
                 onClick={this.animateRoll}
               >
                 
