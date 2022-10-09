@@ -4,7 +4,7 @@ import axios from 'axios';
 import Joke from './Joke';
 import { v4 as uuid } from 'uuid';
 
-const API_URL = 'https://icanhazdadjoke.com/slack';
+const API_URL = 'https://icanhazdadjoke.com/';
 
 class JokesList extends Component {
     constructor(props) {
@@ -17,20 +17,17 @@ class JokesList extends Component {
         this.handleUpVote = this.handleUpVote.bind(this);
     }
     async componentDidMount() {
-
-        for (let i = 0; i < 5; i++) {
-            let response = await axios.get(API_URL);
-            // console.log(response.data);
-            let jokeRec = response.data.attachments[0].text;
-            this.setState(st => ({
-                List: [
-                    ...st.List,
-                    { joke: jokeRec, votes: 0, id: uuid() }
-                ]
-            })
-            )
+        let listOfJokes=[];
+        for (let i = 0; i < 10; i++) {
+            let response = await axios.get(API_URL,{
+                headers :{Accept:"application/json"}
+            });
+            
+            let jokeRec = response.data.joke;
+            listOfJokes.push({joke:jokeRec,votes: 0, id: uuid()})
         }
         this.setState({
+            List: listOfJokes,
             render: true
         })
     }

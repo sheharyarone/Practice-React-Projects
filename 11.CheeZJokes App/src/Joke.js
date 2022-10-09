@@ -5,9 +5,7 @@ class Joke extends Component {
     render() {
         return (
             <div>
-                <li>
-                    {this.props.joke} 
-                </li>
+                {this.props.joke}
                 <div>
                 <p>Votes : {this.props.votes}</p>
                 <button onClick={() => this.props.up(this.props.id)}>UP</button>
