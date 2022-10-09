@@ -7,6 +7,9 @@ import { v4 as uuid } from 'uuid';
 const API_URL = 'https://icanhazdadjoke.com/';
 
 class JokesList extends Component {
+    static defaultProps = {
+        numJokesToGet:10
+    }
     constructor(props) {
         super(props);
         this.state = {
@@ -18,7 +21,7 @@ class JokesList extends Component {
     }
     async componentDidMount() {
         let listOfJokes=[];
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < this.props.numJokesToGet; i++) {
             let response = await axios.get(API_URL,{
                 headers :{Accept:"application/json"}
             });
@@ -75,9 +78,14 @@ class JokesList extends Component {
         if (this.state.render) {
             return (
 
-                <div>
-                    <h1>CHEEZJOKES APP</h1>
-                    <h3>{Jokes}</h3>
+                <div className='JokeList'>
+                    <div className='JokeList-sidebar'>
+                    <h1 className='JokeList-title'><span>DAD</span> JOKES</h1>
+                </div>
+                <div className='JokeList-jokes'>
+                    {Jokes}
+                </div>
+                    
                 </div>
             )
         }
