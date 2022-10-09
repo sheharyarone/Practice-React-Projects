@@ -8,34 +8,54 @@ const API_URL = 'https://icanhazdadjoke.com/';
 
 class JokesList extends Component {
     static defaultProps = {
-        numJokesToGet:10
+        numJokesToGet: 10
     }
     constructor(props) {
         super(props);
         this.state = {
-            List: [],
-            render: false
+            ListOfJokes: JSON.parse(window.localStorage.getItem('ListOfJokes')) || '[]'
         }
         this.handleDownVote = this.handleDownVote.bind(this);
         this.handleUpVote = this.handleUpVote.bind(this);
+        this.getNewJokes = this.getNewJokes.bind(this);
     }
     async componentDidMount() {
-        let listOfJokes=[];
+        if (this.state.ListOfJokes.length === 0) {
+            this.getNewJokes();
+        }
+        else {
+            this.setState({
+                render: true
+            })
+        }
+
+    }
+
+    async getNewJokes() {
+        let listOfJokes = [];
         for (let i = 0; i < this.props.numJokesToGet; i++) {
-            let response = await axios.get(API_URL,{
-                headers :{Accept:"application/json"}
+            let response = await axios.get(API_URL, {
+                headers: { Accept: "application/json" }
             });
-            
+
             let jokeRec = response.data.joke;
-            listOfJokes.push({joke:jokeRec,votes: 0, id: uuid()})
+            listOfJokes.push({ joke: jokeRec, votes: 0, id: uuid() })
         }
         this.setState({
-            List: listOfJokes,
-            render: true
+            ListOfJokes: listOfJokes
         })
+
+        // THIS PIECE OF CODE IS USED TO WRITE DATA TO LOCAL STORAGE
+
+        window.localStorage.setItem(
+            'ListOfJokes',
+            JSON.stringify(listOfJokes)
+        );
+
     }
+
     handleUpVote(id) {
-        const newState = this.state.List.map((JokeInfo => {
+        const newState = this.state.ListOfJokes.map((JokeInfo => {
             if (id === JokeInfo.id) {
                 return {
                     ...JokeInfo,
@@ -45,12 +65,16 @@ class JokesList extends Component {
             return JokeInfo;
         }));
         this.setState({
-            List: newState
+            ListOfJokes: newState
         })
+        window.localStorage.setItem(
+            'ListOfJokes',
+            JSON.stringify(this.state.ListOfJokes)
+        )
 
     }
     handleDownVote(id) {
-        const newState = this.state.List.map((JokeInfo => {
+        const newState = this.state.ListOfJokes.map((JokeInfo => {
             if (id === JokeInfo.id) {
                 return {
                     ...JokeInfo,
@@ -60,12 +84,16 @@ class JokesList extends Component {
             return JokeInfo;
         }));
         this.setState({
-            List: newState
+            ListOfJokes: newState
         })
+        window.localStorage.setItem(
+            'ListOfJokes',
+            JSON.stringify(this.state.ListOfJokes)
+        )
     }
 
     render() {
-        let Jokes = this.state.List.map(J => (
+        let Jokes = this.state.ListOfJokes.map(J => (
             <Joke
                 joke={J.joke}
                 id={J.id}
@@ -80,12 +108,13 @@ class JokesList extends Component {
 
                 <div className='JokeList'>
                     <div className='JokeList-sidebar'>
-                    <h1 className='JokeList-title'><span>DAD</span> JOKES</h1>
-                </div>
-                <div className='JokeList-jokes'>
-                    {Jokes}
-                </div>
-                    
+                        <h1 className='JokeList-title'><span>DAD</span> JOKES</h1>
+                        <button onClick={this.getNewJokes} >New Jokes</button>
+                    </div>
+                    <div className='JokeList-jokes'>
+                        {Jokes}
+                    </div>
+
                 </div>
             )
         }
