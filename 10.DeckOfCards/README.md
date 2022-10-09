@@ -1,14 +1,3 @@
- React Lifecycle Exercise   
-
-Demo
-
-React Lifecycle Exercise
-
-*   [React Lifecycle Exercise](#)
-    *   [Part I - Deck of Cards](#part-i-deck-of-cards)
-    *   [Part II - CheeZJokes App](#part-ii-cheezjokes-app)
-        *   [Further Study](#further-study)
-
 React Lifecycle Exercise
 ========================
 
