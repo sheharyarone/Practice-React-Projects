@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Card from './Card';
-
+import './Deck.css';
 
 const API_URL = 'https://deckofcardsapi.com/api/deck/new/shuffle/';
 
@@ -25,7 +25,7 @@ class Deck extends Component {
         //set state using new card info
         try
             {let response=await axios.get(API_CARD);
-                if(response.data.remaining===0){
+                if(!response.data.success){
                     throw new Error("NO CARDS LEFT IN DECK !");
                 }
         
@@ -47,15 +47,21 @@ class Deck extends Component {
     }
 }
     render() {
-        let cardRender = this.state.drawn.map(card=>(
+        let cards = this.state.drawn.map(card=>(
             <Card key={card.id} src={card.image}/>
         ))
         return (
-            <div>
-                <button onClick={this.getCard}>GET CARD</button>
-                {cardRender}
+            <div className='Deck'>
+              <h1 className='Deck-title'>♦ Card Dealer ♦</h1>
+              <h2 className='Deck-title subtitle'>
+                ♦ A little demo made with React ♦
+              </h2>
+              <button className='Deck-btn' onClick={this.getCard}>
+                Get Card!
+              </button>
+              <div className='Deck-cardarea'>{cards}</div>
             </div>
-        )
+          );
     }
 }
 export default Deck;
