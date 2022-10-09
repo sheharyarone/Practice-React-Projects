@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './JokeList.css';
 import axios from 'axios';
 import Joke from './Joke';
 const API_URL = 'https://icanhazdadjoke.com/slack';
@@ -7,7 +8,8 @@ class JokesList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            List: []
+            List: [],
+            render: false
         }
     }
     async componentDidMount() {
@@ -24,18 +26,31 @@ class JokesList extends Component {
             })
             )
         }
+        this.setState({
+            render: true
+        })
     }
 
     render() {
         let Jokes = this.state.List.map(J => (
             <Joke joke={J} />
         ))
-        return (
-            <div>
-                <h1>CHEEZJOKES APP</h1>
-                <h3>{Jokes}</h3>
-            </div>
-        )
+        if (this.state.render) {
+            return (
+
+                <div>
+                    <h1>CHEEZJOKES APP</h1>
+                    <h3>{Jokes}</h3>
+                </div>
+            )
+        }
+        else {
+            return (
+                <div className='loader'>
+
+                </div>
+            )
+        }
     }
 }
 export default JokesList;
