@@ -12,4 +12,4 @@ Every time the user clicks, the app should display a new card until the deck is 
 
 Here’s how this might look (with styling added):
 
-![Alt text](1.gif) / ![](1.gif)
+![Alt text](1.gif) 
