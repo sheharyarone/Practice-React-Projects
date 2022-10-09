@@ -66,11 +66,13 @@ class JokesList extends Component {
         }));
         this.setState({
             ListOfJokes: newState
-        })
-        window.localStorage.setItem(
+        },                                                                
+        window.localStorage.setItem(                // ANOTHER WAY OF WRITING IT AFTER SETSTATE FUNCTION USING COMMA
             'ListOfJokes',
             JSON.stringify(this.state.ListOfJokes)
         )
+        )
+        
 
     }
     handleDownVote(id) {
@@ -85,11 +87,14 @@ class JokesList extends Component {
         }));
         this.setState({
             ListOfJokes: newState
-        })
-        window.localStorage.setItem(
+        }, window.localStorage.setItem(
             'ListOfJokes',
             JSON.stringify(this.state.ListOfJokes)
-        )
+        ))
+        // window.localStorage.setItem(
+        //     'ListOfJokes',
+        //     JSON.stringify(this.state.ListOfJokes)
+        // )
     }
 
     render() {
