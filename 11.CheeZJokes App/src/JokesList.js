@@ -8,29 +8,22 @@ const API_URL = 'https://icanhazdadjoke.com/';
 
 class JokesList extends Component {
     static defaultProps = {
-        numJokesToGet: 10
+        numJokesToGet: 5
     }
     constructor(props) {
         super(props);
         this.state = {
-            ListOfJokes: JSON.parse(window.localStorage.getItem('ListOfJokes')) || '[]'
+            List: JSON.parse(window.localStorage.getItem('List')) || []
         }
         this.handleDownVote = this.handleDownVote.bind(this);
         this.handleUpVote = this.handleUpVote.bind(this);
         this.getNewJokes = this.getNewJokes.bind(this);
+        this.writeOnStorage = this.writeOnStorage.bind(this);
     }
     async componentDidMount() {
-        if (this.state.ListOfJokes.length === 0) {
+        if (this.state.List.length === 0)
             this.getNewJokes();
-        }
-        else {
-            this.setState({
-                render: true
-            })
-        }
-
     }
-
     async getNewJokes() {
         let listOfJokes = [];
         for (let i = 0; i < this.props.numJokesToGet; i++) {
@@ -41,21 +34,25 @@ class JokesList extends Component {
             let jokeRec = response.data.joke;
             listOfJokes.push({ joke: jokeRec, votes: 0, id: uuid() })
         }
-        this.setState({
-            ListOfJokes: listOfJokes
-        })
-
-        // THIS PIECE OF CODE IS USED TO WRITE DATA TO LOCAL STORAGE
-
+        this.setState(st => ({
+            List: [...st.List,
+            ...listOfJokes        //... was the problem
+            ]
+        }),
+            this.writeOnStorage
+        )
+    }
+    writeOnStorage() {
         window.localStorage.setItem(
-            'ListOfJokes',
-            JSON.stringify(listOfJokes)
+            'List',
+            JSON.stringify(this.state.List)
         );
-
     }
 
+    // HANDLE VOTES ARE DECREMENTING ONE VALUE FROM ACTUAL WHEN GETTING DATA FROM LOCAL STORAGE
+
     handleUpVote(id) {
-        const newState = this.state.ListOfJokes.map((JokeInfo => {
+        const newState = this.state.List.map((JokeInfo => {
             if (id === JokeInfo.id) {
                 return {
                     ...JokeInfo,
@@ -65,18 +62,14 @@ class JokesList extends Component {
             return JokeInfo;
         }));
         this.setState({
-            ListOfJokes: newState
-        },                                                                
-        window.localStorage.setItem(                // ANOTHER WAY OF WRITING IT AFTER SETSTATE FUNCTION USING COMMA
-            'ListOfJokes',
-            JSON.stringify(this.state.ListOfJokes)
-        )
-        )
-        
+            List: newState
+        },
+            this.writeOnStorage()
+        );
 
     }
     handleDownVote(id) {
-        const newState = this.state.ListOfJokes.map((JokeInfo => {
+        const newState = this.state.List.map((JokeInfo => {
             if (id === JokeInfo.id) {
                 return {
                     ...JokeInfo,
@@ -86,19 +79,15 @@ class JokesList extends Component {
             return JokeInfo;
         }));
         this.setState({
-            ListOfJokes: newState
-        }, window.localStorage.setItem(
-            'ListOfJokes',
-            JSON.stringify(this.state.ListOfJokes)
-        ))
-        // window.localStorage.setItem(
-        //     'ListOfJokes',
-        //     JSON.stringify(this.state.ListOfJokes)
-        // )
+            List: newState
+        },
+            this.writeOnStorage()
+
+        );
     }
 
     render() {
-        let Jokes = this.state.ListOfJokes.map(J => (
+        let Jokes = this.state.List.map(J => (
             <Joke
                 joke={J.joke}
                 id={J.id}
@@ -108,28 +97,21 @@ class JokesList extends Component {
                 down={this.handleDownVote}
             />
         ))
-        if (this.state.render) {
-            return (
 
-                <div className='JokeList'>
-                    <div className='JokeList-sidebar'>
-                        <h1 className='JokeList-title'><span>DAD</span> JOKES</h1>
-                        <button onClick={this.getNewJokes} >New Jokes</button>
-                    </div>
-                    <div className='JokeList-jokes'>
-                        {Jokes}
-                    </div>
+        return (
 
+            <div className='JokeList'>
+                <div className='JokeList-sidebar'>
+                    <h1 className='JokeList-title'><span>DAD</span> JOKES</h1>
+                    <button onClick={this.getNewJokes}>GET NEW JOKES</button>
                 </div>
-            )
-        }
-        else {
-            return (
-                <div className='loader'>
-
+                <div className='JokeList-jokes'>
+                    {Jokes}
                 </div>
-            )
-        }
+
+            </div>
+        )
+
     }
 }
 export default JokesList;
