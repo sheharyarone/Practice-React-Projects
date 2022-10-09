@@ -6,10 +6,13 @@ class Joke extends Component {
         return (
             <div>
                 <li>
-                    {this.props.joke} Votes : {this.props.votes}
+                    {this.props.joke} 
                 </li>
+                <div>
+                <p>Votes : {this.props.votes}</p>
                 <button onClick={() => this.props.up(this.props.id)}>UP</button>
                 <button onClick={() => this.props.down(this.props.id)}>Down</button>
+                </div>
             </div>
         )
     }
