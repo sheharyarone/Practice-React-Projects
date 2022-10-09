@@ -23,9 +23,14 @@ class Deck extends Component {
         const API_CARD=`https://deckofcardsapi.com/api/deck/${this.state.deck.deck_id}/draw/`;  
         //make request using deck_id
         //set state using new card info
-        let response=await axios.get(API_CARD);
+        try
+            {let response=await axios.get(API_CARD);
+                if(response.data.remaining===0){
+                    throw new Error("NO CARDS LEFT IN DECK !");
+                }
+        
+
         let card=response.data.cards[0];
-        // console.log(response.data);  
         this.setState(st=>({
             drawn: [
                 ...st.drawn,
@@ -35,7 +40,12 @@ class Deck extends Component {
                 }
             ]
         }))
+
     }
+    catch(err){
+        alert(err);
+    }
+}
     render() {
         let cardRender = this.state.drawn.map(card=>(
             <Card key={card.id} src={card.image}/>
