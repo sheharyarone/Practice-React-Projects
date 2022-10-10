@@ -39,7 +39,7 @@ class JokesList extends Component {
             ...listOfJokes        //... was the problem
             ]
         }),
-            this.writeOnStorage
+           ()=> this.writeOnStorage()
         )
     }
     writeOnStorage() {
@@ -64,7 +64,8 @@ class JokesList extends Component {
         this.setState({
             List: newState
         },
-            this.writeOnStorage()
+          ()=>  this.writeOnStorage()  //ARROW FUNCTION IS NECESSARY OTHERWISE IT IS 
+                                        //SKIPPING LAST STATE CHANGE
         );
 
     }
