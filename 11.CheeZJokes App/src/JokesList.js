@@ -15,8 +15,8 @@ class JokesList extends Component {
         this.state = {
             List: JSON.parse(window.localStorage.getItem('List')) || []
         }
-        this.handleDownVote = this.handleDownVote.bind(this);
-        this.handleUpVote = this.handleUpVote.bind(this);
+        
+        this.handleVote = this.handleVote.bind(this);
         this.getNewJokes = this.getNewJokes.bind(this);
         this.writeOnStorage = this.writeOnStorage.bind(this);
     }
@@ -51,12 +51,12 @@ class JokesList extends Component {
 
     // HANDLE VOTES ARE DECREMENTING ONE VALUE FROM ACTUAL WHEN GETTING DATA FROM LOCAL STORAGE
 
-    handleUpVote(id) {
+    handleVote(id,num) {
         const newState = this.state.List.map((JokeInfo => {
             if (id === JokeInfo.id) {
                 return {
                     ...JokeInfo,
-                    votes: JokeInfo.votes + 1
+                    votes: JokeInfo.votes + num
                 };
             }
             return JokeInfo;
@@ -68,24 +68,6 @@ class JokesList extends Component {
         );
 
     }
-    handleDownVote(id) {
-        const newState = this.state.List.map((JokeInfo => {
-            if (id === JokeInfo.id) {
-                return {
-                    ...JokeInfo,
-                    votes: JokeInfo.votes - 1
-                };
-            }
-            return JokeInfo;
-        }));
-        this.setState({
-            List: newState
-        },
-            this.writeOnStorage()
-
-        );
-    }
-
     render() {
         let Jokes = this.state.List.map(J => (
             <Joke
@@ -93,8 +75,8 @@ class JokesList extends Component {
                 id={J.id}
                 key={J.id}
                 votes={J.votes}
-                up={this.handleUpVote}
-                down={this.handleDownVote}
+                handleVote={this.handleVote}
+                
             />
         ))
 
