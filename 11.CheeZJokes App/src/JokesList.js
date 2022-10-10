@@ -8,7 +8,7 @@ const API_URL = 'https://icanhazdadjoke.com/';
 
 class JokesList extends Component {
     static defaultProps = {
-        numJokesToGet: 5
+        numJokesToGet: 10
     }
     constructor(props) {
         super(props);
@@ -16,34 +16,40 @@ class JokesList extends Component {
             List: JSON.parse(window.localStorage.getItem('List')) || [],
             renderLoadingIcon: false
         }
+        this.seenJokes = new Set(this.state.List.map(Joke => Joke.joke));
 
         this.handleVote = this.handleVote.bind(this);
-        // this.getNewJokes = this.getNewJokes.bind(this);
-        this.handleClick=this.handleClick.bind(this);
-        // this.writeOnStorage = this.writeOnStorage.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
     async componentDidMount() {
         if (this.state.List.length === 0)
             this.handleClick();
     }
     async handleClick() {
-        this.setState({ renderLoadingIcon: true }, ()=>this.getNewJokes())
+        this.setState({ renderLoadingIcon: true }, () => this.getNewJokes())
     }
     async getNewJokes() {
         let listOfJokes = [];
-        for (let i = 0; i < this.props.numJokesToGet; i++) {
+        while (listOfJokes.length < this.props.numJokesToGet) {
             let response = await axios.get(API_URL, {
                 headers: { Accept: "application/json" }
             });
 
             let jokeRec = response.data.joke;
-            listOfJokes.push({ joke: jokeRec, votes: 0, id: uuid() })
+            if (!this.seenJokes.has(jokeRec)) {
+                listOfJokes.push({ joke: jokeRec, votes: 0, id: uuid() });
+            }
+            else {
+                console.log('FOUND A DUPLICATE');
+                console.log(jokeRec);
+            }
         }
+
         this.setState(st => ({
+            renderLoadingIcon: false,
             List: [...st.List,
             ...listOfJokes        //... was the problem
-            ],
-            renderLoadingIcon: false
+            ]
         }),
             () => this.writeOnStorage()
         )
@@ -97,20 +103,21 @@ class JokesList extends Component {
                     <div className='JokeList-jokes'>
                         {Jokes}
                     </div>
-
                 </div>
+
             )
         }
 
         //LOADING PART
 
-        else{
-            return(
+        else {
+            return (
                 <div className='JokeList-spinner'>
-                <i className='far fa-8x fa-laugh fa-spin' />
-                <h1 className='JokeList-title'>Loading...</h1>
-              </div>
-        )}
+                    <i className='far fa-8x fa-laugh fa-spin' />
+                    <h1 className='JokeList-title'>Loading...</h1>
+                </div>
+            )
+        }
     }
 }
 export default JokesList;
