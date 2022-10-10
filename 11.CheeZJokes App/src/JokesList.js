@@ -91,7 +91,9 @@ class JokesList extends Component {
 
     }
     render() {
-        let Jokes = this.state.List.map(J => (
+        // b-a return descending (positive,zero,negaive)
+        let JokesSorted=this.state.List.sort((a,b)=>b.votes-a.votes); 
+        let Jokes = JokesSorted.map(J => (
             <Joke
                 joke={J.joke}
                 id={J.id}
