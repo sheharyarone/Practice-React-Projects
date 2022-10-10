@@ -38,6 +38,7 @@ class JokesList extends Component {
 
                 let jokeRec = response.data.joke;
                 if (!this.seenJokes.has(jokeRec)) {
+                    this.seenJokes.add(jokeRec);
                     listOfJokes.push({ joke: jokeRec, votes: 0, id: uuid() });
                 }
                 else {
@@ -45,7 +46,6 @@ class JokesList extends Component {
                     console.log(jokeRec);
                 }
             }
-
             this.setState(st => ({
                 renderLoadingIcon: false,
                 List: [...st.List,
@@ -54,6 +54,7 @@ class JokesList extends Component {
             }),
                 () => this.writeOnStorage()
             )
+
         }
         catch(err){
             this.setState({
