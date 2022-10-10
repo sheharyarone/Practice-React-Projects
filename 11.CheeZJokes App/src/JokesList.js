@@ -29,30 +29,38 @@ class JokesList extends Component {
         this.setState({ renderLoadingIcon: true }, () => this.getNewJokes())
     }
     async getNewJokes() {
-        let listOfJokes = [];
-        while (listOfJokes.length < this.props.numJokesToGet) {
-            let response = await axios.get(API_URL, {
-                headers: { Accept: "application/json" }
-            });
+        try {
+            let listOfJokes = [];
+            while (listOfJokes.length < this.props.numJokesToGet) {
+                let response = await axios.get(API_URL, {
+                    headers: { Accept: "application/json" }
+                });
 
-            let jokeRec = response.data.joke;
-            if (!this.seenJokes.has(jokeRec)) {
-                listOfJokes.push({ joke: jokeRec, votes: 0, id: uuid() });
+                let jokeRec = response.data.joke;
+                if (!this.seenJokes.has(jokeRec)) {
+                    listOfJokes.push({ joke: jokeRec, votes: 0, id: uuid() });
+                }
+                else {
+                    console.log('FOUND A DUPLICATE');
+                    console.log(jokeRec);
+                }
             }
-            else {
-                console.log('FOUND A DUPLICATE');
-                console.log(jokeRec);
-            }
+
+            this.setState(st => ({
+                renderLoadingIcon: false,
+                List: [...st.List,
+                ...listOfJokes        //... was the problem
+                ]
+            }),
+                () => this.writeOnStorage()
+            )
         }
-
-        this.setState(st => ({
-            renderLoadingIcon: false,
-            List: [...st.List,
-            ...listOfJokes        //... was the problem
-            ]
-        }),
-            () => this.writeOnStorage()
-        )
+        catch(err){
+            this.setState({
+                renderLoadingIcon:false
+            },
+            alert('BAD REQUEST'));
+        }
     }
     writeOnStorage() {
         window.localStorage.setItem(
