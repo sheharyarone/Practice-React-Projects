@@ -13,16 +13,21 @@ class JokesList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            List: JSON.parse(window.localStorage.getItem('List')) || []
+            List: JSON.parse(window.localStorage.getItem('List')) || [],
+            renderLoadingIcon: false
         }
-        
+
         this.handleVote = this.handleVote.bind(this);
-        this.getNewJokes = this.getNewJokes.bind(this);
-        this.writeOnStorage = this.writeOnStorage.bind(this);
+        // this.getNewJokes = this.getNewJokes.bind(this);
+        this.handleClick=this.handleClick.bind(this);
+        // this.writeOnStorage = this.writeOnStorage.bind(this);
     }
     async componentDidMount() {
         if (this.state.List.length === 0)
-            this.getNewJokes();
+            this.handleClick();
+    }
+    async handleClick() {
+        this.setState({ renderLoadingIcon: true }, ()=>this.getNewJokes())
     }
     async getNewJokes() {
         let listOfJokes = [];
@@ -37,9 +42,10 @@ class JokesList extends Component {
         this.setState(st => ({
             List: [...st.List,
             ...listOfJokes        //... was the problem
-            ]
+            ],
+            renderLoadingIcon: false
         }),
-           ()=> this.writeOnStorage()
+            () => this.writeOnStorage()
         )
     }
     writeOnStorage() {
@@ -51,7 +57,7 @@ class JokesList extends Component {
 
     // HANDLE VOTES ARE DECREMENTING ONE VALUE FROM ACTUAL WHEN GETTING DATA FROM LOCAL STORAGE
 
-    handleVote(id,num) {
+    handleVote(id, num) {
         const newState = this.state.List.map((JokeInfo => {
             if (id === JokeInfo.id) {
                 return {
@@ -64,8 +70,8 @@ class JokesList extends Component {
         this.setState({
             List: newState
         },
-          ()=>  this.writeOnStorage()  //ARROW FUNCTION IS NECESSARY OTHERWISE IT IS 
-                                        //SKIPPING LAST STATE CHANGE
+            () => this.writeOnStorage()  //ARROW FUNCTION IS NECESSARY OTHERWISE IT IS 
+            //SKIPPING LAST STATE CHANGE
         );
 
     }
@@ -77,24 +83,34 @@ class JokesList extends Component {
                 key={J.id}
                 votes={J.votes}
                 handleVote={this.handleVote}
-                
+
             />
         ))
+        if (!this.state.renderLoadingIcon) {
+            return (
 
-        return (
+                <div className='JokeList'>
+                    <div className='JokeList-sidebar'>
+                        <h1 className='JokeList-title'><span>DAD</span> JOKES</h1>
+                        <button onClick={this.handleClick}>GET NEW JOKES</button>
+                    </div>
+                    <div className='JokeList-jokes'>
+                        {Jokes}
+                    </div>
 
-            <div className='JokeList'>
-                <div className='JokeList-sidebar'>
-                    <h1 className='JokeList-title'><span>DAD</span> JOKES</h1>
-                    <button onClick={this.getNewJokes}>GET NEW JOKES</button>
                 </div>
-                <div className='JokeList-jokes'>
-                    {Jokes}
-                </div>
+            )
+        }
 
-            </div>
-        )
+        //LOADING PART
 
+        else{
+            return(
+                <div className='JokeList-spinner'>
+                <i className='far fa-8x fa-laugh fa-spin' />
+                <h1 className='JokeList-title'>Loading...</h1>
+              </div>
+        )}
     }
 }
 export default JokesList;
