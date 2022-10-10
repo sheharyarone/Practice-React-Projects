@@ -109,7 +109,7 @@ class JokesList extends Component {
                 <div className='JokeList'>
                     <div className='JokeList-sidebar'>
                         <h1 className='JokeList-title'><span>DAD</span> JOKES</h1>
-                        <button onClick={this.handleClick}>GET NEW JOKES</button>
+                        <button onClick={this.handleClick} className='JokeList-getmore' >FETCH JOKES</button>
                     </div>
                     <div className='JokeList-jokes'>
                         {Jokes}
