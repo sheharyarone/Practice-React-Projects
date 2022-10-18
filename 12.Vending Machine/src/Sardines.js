@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Message from './Message';
 class Sardines extends Component {
     constructor(props){
         super(props);
@@ -18,11 +19,19 @@ class Sardines extends Component {
     render(){
         return(
             <div>
+                <Message>
+                    <h2>
+                        You Don't eat sardines.the sardines, they eat you!
+                    </h2>
+
+
+                </Message>
+                <Message>
                 <button onClick={this.handleClick}>
                     ADD SARDINE
                 </button>
                 <Link to='/'>GO BACK</Link>
-
+                </Message>
             </div>
         )
     }

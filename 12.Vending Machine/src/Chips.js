@@ -1,28 +1,31 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './Chips.css';
+
+import Message from './Message';
 class Chips extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
-            Number : 0
+        this.state = {
+            Number: 0
         };
-        this.handleClick=this.handleClick.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
-    handleClick(){
-        
+    handleClick() {
+
         this.setState({
-            Number: this.state.Number+1
+            Number: this.state.Number + 1
         });
     }
-    render(){
-        return(
+    render() {
+        return (
             <div>
-                <button onClick={this.handleClick}>
-                    ADD CHIPS
-                </button>
-                <Link to='/'>GO BACK</Link>
-                
+                <Message>
+                    <button onClick={this.handleClick}>
+                        ADD CHIPS
+                    </button>
+                    <Link to='/'>GO BACK</Link>
+                </Message>
+
             </div>
         )
     }
