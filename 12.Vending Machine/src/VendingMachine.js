@@ -1,19 +1,33 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import Message from "./Message";
+import "./VendingMachine.css";
+import vendingMachineImg from "./VendingMachine.png";
+
 class VendingMachine extends Component {
-    render() {
-        return (
-            <div>
-                <Link exact to="/soda">Soda</Link>
-                <Link exact to="/sardines">Sardines</Link>
-                <Link exact to="/chips">Chips</Link>
-
-
-                <img src="https://images.unsplash.com/photo-1618506557292-ec1862b3c506?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8dmVuZGluZyUyMG1hY2hpbmV8ZW58MHx8MHx8&w=1000&q=80" alt='VENDING MACHINE'  />
-                <h2>hello i am the vending machnine what would you like to have ? </h2>
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div
+        className='VendingMachine'
+        style={{ backgroundImage: `url(${vendingMachineImg})` }}
+      >
+        <Message>
+          <h1>hello i am a vending machine. what would you like to eat?</h1>
+        </Message>
+        <Message>
+          <h1>
+            <Link to='/soda'>Soda</Link>
+          </h1>
+          <h1>
+            <Link to='/chips'>Chips</Link>
+          </h1>
+          <h1>
+            <Link to='/sardines'>Sardines</Link>
+          </h1>
+        </Message>
+      </div>
+    );
+  }
 }
 
 export default VendingMachine;
