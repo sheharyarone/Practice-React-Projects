@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './Chips.css';
 class Chips extends Component {
     constructor(props){
@@ -20,6 +21,8 @@ class Chips extends Component {
                 <button onClick={this.handleClick}>
                     ADD CHIPS
                 </button>
+                <Link to='/'>GO BACK</Link>
+                
             </div>
         )
     }

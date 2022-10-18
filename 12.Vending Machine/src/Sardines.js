@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router-dom';
 class Sardines extends Component {
     constructor(props){
         super(props);
@@ -21,6 +21,8 @@ class Sardines extends Component {
                 <button onClick={this.handleClick}>
                     ADD SARDINE
                 </button>
+                <Link to='/'>GO BACK</Link>
+
             </div>
         )
     }

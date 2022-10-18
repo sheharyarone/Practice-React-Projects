@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router-dom';
 class Soda extends Component {
     constructor(props){
         super(props);
@@ -20,6 +20,7 @@ class Soda extends Component {
                 <button onClick={this.handleClick}>
                     ADD SODA
                 </button>
+                <Link to='/'>GO BACK</Link>
             </div>
         )
     }
