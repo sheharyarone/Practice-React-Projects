@@ -10,9 +10,14 @@ import { Route,Routes } from 'react-router-dom';
 function App() {
   return (
     <div className="App">
+        
       <Routes>
-      <Route path="/f" element={ <Chips/> }/>
+      <Route path="/" element={ <VendingMachine/> }/>
+      <Route path="/chips" element={ <Chips/> }/>
+      <Route path="/soda" element={ <Soda/> }/>
+      <Route path="/Sardines" element={ <Sardines/> }/>
       </Routes>
+
     </div>
   );
 }
