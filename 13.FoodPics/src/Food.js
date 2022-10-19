@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import {useParams } from 'react-router-dom';
+
 class Food extends Component {
     render() {
-        let params=useParams();
-        const name1=this.params.name;
+        const name1=this.props.match.params.name;
 
         const url = `https://source.unsplash.com/1600x900/?${name1}`;
         return(
