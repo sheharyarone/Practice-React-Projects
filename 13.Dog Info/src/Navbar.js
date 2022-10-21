@@ -5,7 +5,6 @@ class Navbar extends Component {
     render() {
         
         const dogsName = dogList.map((dog) => {
-            // console.log(dog.name);
             return <NavLink exact to={`/${dog.name}`} > {dog.name}</NavLink>
 
         });
