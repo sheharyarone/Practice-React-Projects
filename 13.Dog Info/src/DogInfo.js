@@ -7,7 +7,7 @@ class DogInfo extends Component {
             (name === dog.name) &&
             <div>
                 <img src={require(`./${dog.src}.jpg`)} alt={name} />
-                <h2>{this.props.name}</h2>
+                <h2>{name}</h2>
                 <h3>age : {dog.age}</h3>
                 {
                     dog.facts.map(fact =>
