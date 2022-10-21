@@ -1,70 +1,99 @@
-# Getting Started with Create React App
+ React Router Patterns   
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Demo
 
-## Available Scripts
+React Router Patterns
 
-In the project directory, you can run:
+*   [React Router Patterns](#)
+    *   [React Router Dog Finder](#part-1-react-router-dog-finder)
+        *   [Recommended Structure](#recommended-structure)
+    *   [Further Study: React Router Calculator](#further-study-react-router-calculator)
 
-### `npm start`
+React Router Patterns
+=====================
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+React Router Dog Finder
+-----------------------
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Build an app that allows a user to browse dogs.
 
-### `npm test`
+At the top of the app, add a navbar that displays the current active route.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The app should have the following routes:
 
-### `npm run build`
+*   /dogs is the homepage and shows all three dogs
+*   When you’re on the homepage, you can click on a dog to view more information on that dog. Each dog should have its own unique route. For example, clicking on Whiskey will take you to /dogs/whiskey.
+*   Every other endpoint not listed should redirect you to /dogs.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Make the website responsive (if you have time). The solution uses bootstrap to add a responsive navbar and grid layout.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Recommended Structure
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+You can preload the <App /> component with the following `defaultProps` for convenience:
 
-### `npm run eject`
+App.defaultProps \= {
+  dogs: \[
+    {
+      name: "Whiskey",
+      age: 5,
+      src: whiskey,
+      facts: \[
+        "Whiskey loves eating popcorn.",
+        "Whiskey is a terrible guard dog.",
+        "Whiskey wants to cuddle with you!"
+      \]
+    },
+    {
+      name: "Hazel",
+      age: 3,
+      src: hazel,
+      facts: \[
+        "Hazel has soooo much energy!",
+        "Hazel is highly intelligent.",
+        "Hazel loves people more than dogs."
+      \]
+    },
+    {
+      name: "Tubby",
+      age: 4,
+      src: tubby,
+      facts: \[
+        "Tubby is not the brightest dog",
+        "Tubby does not like walks or exercise.",
+        "Tubby loves eating food."
+      \]
+    }
+  \]
+}
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+The <App /> should render:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+*   a <Nav /> component with the dogs’ names passed as props
+*   a <Switch> with your <Route /> declarations
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Further Study: React Router Calculator
+--------------------------------------
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+It’s time to build another routing-based calculator, but this time with React Router!
 
-## Learn More
+Build a calculator that supports routes like:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+/add/1/2
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+should render a component that displays 3.
 
-### Code Splitting
+/subtract/3/2
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+should render a component that displays 1.
 
-### Analyzing the Bundle Size
+/multiply/6/4
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+should render a component that displays 24.
 
-### Making a Progressive Web App
+/divide/20/5
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+should render a component that displays 4.
 
-### Advanced Configuration
+As a bonus, try to do this without using a different component for each of the four math operations!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Good luck!
