@@ -10,7 +10,7 @@ class Navbar extends Component {
         );
         return (
             <div className='Navbar'>
-                <NavLink exact activeClassName='Navbar-active' to='/'>HOME</NavLink>
+                <NavLink  activeClassName='Navbar-active' to='/'>HOME</NavLink>
                 {dogsName}
             </div>
         )
